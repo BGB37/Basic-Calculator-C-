@@ -4,6 +4,7 @@ using System;
 
 namespace BasicCalculator
 {
+
     class Calculator
     {
         static double num1 = 0;   //double'a çevirdik.
@@ -12,6 +13,9 @@ namespace BasicCalculator
         static double result;
         static string goOn = "Y";
         static int count = 0;
+        static double input;  // New
+        static bool numberEnteredAndAccepted = false;
+    
 
         static void introMsg()
         {
@@ -22,12 +26,69 @@ namespace BasicCalculator
         }
 
         static void getNumbers()
-        {
-            Console.Write("\tEnter first number: ");
-            num1 = Convert.ToDouble(Console.ReadLine()); 
-            Console.Write("\tEnter second number: ");
-            num2 = Convert.ToDouble(Console.ReadLine());
+        { 
+            while (numberEnteredAndAccepted == false) // Girdiler geçerli olmadığı sürece dön.
+            {
+                // static bool
+                try
+                {
+                 Console.Write("\n\tEnter first number: ");
+                 num1 = Convert.ToDouble(Console.ReadLine());
+                 //if(!double.TryParse(input, out inputAfterParsedToDouble)
+                 //checkIfNumberCanBeParsedToIntNum1();
+                 Console.WriteLine("\n\tFirst number: {0}", num1);  // Only to check
+                  
+                 Console.Write("\n\tEnter second number: ");
+                 num2 = Convert.ToDouble(Console.ReadLine());
+                 //checkIfNumberCanBeParsedToIntNum2();
+                 Console.WriteLine("\n\tSecond number: {0}", num2); // Only to check
+
+                    numberEnteredAndAccepted = true;
+               
+                }
+                catch (Exception e) // Uygulamanın catch'e girmesi bir exception'ın yakalanması demek.
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\n\tThere was an error. \n\tDescription of the error is: " + e.Message);
+                    //Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ResetColor();
+                    numberEnteredAndAccepted = false;
+                }
+            }
+          
         }
+
+        /* static void checkIfNumberCanBeParsedToIntNum1()  // Bu methodu hem num1 hem de num2 için nasıl tek bir fonksiyon olarak yazabilirim?
+        {
+            while (!int.TryParse(input, out inputAfterParsedToDouble || !double.TryParse(input, out inputAfterParsedToDouble));
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n\tYou should enter a number!");
+                Console.ForegroundColor = ConsoleColor.White;
+                input = Convert.ToDouble(Console.ReadLine());
+
+                
+            }
+            num1 = inputAfterParsedToInt;
+
+        } */
+
+        /* static void checkIfNumberCanBeParsedToIntNum2()
+        {
+            
+            while (!int.TryParse(input, out t))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n\tYou should enter a number!");
+                Console.ForegroundColor = ConsoleColor.White;
+                input = Console.ReadLine();
+
+
+            }
+            num2 = inputAfterParsedToInt;
+
+        }
+        */
 
         static void showOptions()
         {
@@ -52,43 +113,45 @@ namespace BasicCalculator
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-       /* static void SwitchCase()
-        {
-            switch (option)
-            {
-                case "+":
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    result = num1 + num2;
-                    Console.WriteLine($"\t{num1} + {num2} = " + result);
-                    break;
+        /* static void SwitchCase()
+         {
+             switch (option)
+             {
+                 case "+":
+                     Console.ForegroundColor = ConsoleColor.Blue;
+                     result = num1 + num2;
+                     Console.WriteLine($"\t{num1} + {num2} = " + result);
+                     break;
 
-                case "-":
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"\tOption you entered is: {option}");
-                    result = num1 - num2;
-                    Console.WriteLine($"\t{num1} - {num2} = " + result);
-                    break;
+                 case "-":
+                     Console.ForegroundColor = ConsoleColor.Blue;
+                     Console.WriteLine($"\tOption you entered is: {option}");
+                     result = num1 - num2;
+                     Console.WriteLine($"\t{num1} - {num2} = " + result);
+                     break;
 
-                case "x":
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"\tOption you entered is: {option}");
-                    result = num1 * num2;
-                    Console.WriteLine($"\t{num1} x {num2} = " + result);
-                    break;
-            }
-        } */
+                 case "x":
+                     Console.ForegroundColor = ConsoleColor.Blue;
+                     Console.WriteLine($"\tOption you entered is: {option}");
+                     result = num1 * num2;
+                     Console.WriteLine($"\t{num1} x {num2} = " + result);
+                     break;
+             }
+         } */
 
         static void doYouWantToContinue()
         {
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("\n\tDo you want to continue? Y: yes / N: no");
+            Console.Write("\n\tDo you want to continue? Y: yes / N: no");
+            Console.WriteLine();
             goOn = Console.ReadLine().ToUpper();
             while (goOn != "Y" && goOn != "N")
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"\n\tYou entered: {goOn}" + ". You should enter \"Y\" or \"N\" ");
+                Console.Write($"\n\tYou entered: {goOn}" + ". You should enter \"Y\" or \"N\" ");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("\n\tDo you want to continue? Y: yes / N: no");
+                Console.Write("\n\n\tDo you want to continue? Y: yes / N: no");
+                Console.WriteLine();
                 goOn = Console.ReadLine().ToUpper();
             }
 
@@ -134,29 +197,38 @@ namespace BasicCalculator
                     break;
             }
         }
-            
-        
-                static void Main(string[] args)
+
+        static void programEnded()
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.Write("\n\tPROGRAM ENDED");
+            Console.ResetColor();
+        }
+
+
+        static void Main(string[] args)
+        {
+            while (goOn == "Y")  // Added a loop if user wants to continue calculating
             {
-                    while (goOn == "Y")  // Added a loop if user wants to continue calculating
-                    {
-                        if (count == 0)
-                        {
-                            introMsg();
-                        }
-
-                         getNumbers();
-                         showOptions();
-                         getOption();
-                         showResult();
-                         doYouWantToContinue();
-                         count++;
-
+                if (count == 0) // Eğer kullanıcı aynı oturum içerisinde ikinci veya daha fazla sayıdaki işlemini yapıyorsa, giriş mesajına gerek yok.
+                {
+                    introMsg();
                 }
-                Console.WriteLine("\n\tProgram Ended.");
-            }
 
+                getNumbers();
+                showOptions();
+                getOption();
+                showResult();
+                doYouWantToContinue();
+                count++;
+                numberEnteredAndAccepted = false; // Her turda getNumbers() içindeki while a girmesi için bu değişkeni her ana döngü sonunda false yapıyorum.
+
+
+            }
+            programEnded();
         }
 
     }
+
+}
 

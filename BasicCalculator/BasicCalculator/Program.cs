@@ -19,10 +19,22 @@ namespace BasicCalculator
 
         static void introMsg()
         {
-            Console.WriteLine("\t----------  ----------");
-            Console.Write("\tBGB's Basic Calculator");
-            Console.WriteLine(" :)");
-            Console.WriteLine("\t----------  ---------");
+           Console.WriteLine
+                (@"                          
+                    --------------------
+                   |      10 x 10 = 100 |
+                   |____________________|
+                   |  1    2    3   +   |
+                   |  4    5    6   -   |
+                   |  7    8    9   /   |
+                   |  0   00   000  x   |
+                   |____________________|");
+            Console.ForegroundColor= ConsoleColor.Green;    
+            Console.WriteLine(@"
+                    ----------  ----------
+                    BGB's Basic Calculator
+                    ----------  --------- ");
+            Console.ResetColor();
         }
 
         static void getNumbers()

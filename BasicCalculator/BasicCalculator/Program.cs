@@ -7,8 +7,8 @@ namespace BasicCalculator
 
     class Calculator
     {
-        static double num1 = 0;   //double'a çevirdik.
-        static double num2 = 0;   //double'a çevirdik.
+        static double num1 = 0;   
+        static double num2 = 0;   
         static string option;
         static double result;
         static string goOn = "Y";
@@ -39,7 +39,7 @@ namespace BasicCalculator
 
         static void getNumbers()
         { 
-            while (numberEnteredAndAccepted == false) // Girdiler geçerli olmadığı sürece dön.
+            while (numberEnteredAndAccepted == false) // turn untill entered values are valid.
             {
                 // static bool
                 try
@@ -70,37 +70,6 @@ namespace BasicCalculator
           
         }
 
-        /* static void checkIfNumberCanBeParsedToIntNum1()  // Bu methodu hem num1 hem de num2 için nasıl tek bir fonksiyon olarak yazabilirim?
-        {
-            while (!int.TryParse(input, out inputAfterParsedToDouble || !double.TryParse(input, out inputAfterParsedToDouble));
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\n\tYou should enter a number!");
-                Console.ForegroundColor = ConsoleColor.White;
-                input = Convert.ToDouble(Console.ReadLine());
-
-                
-            }
-            num1 = inputAfterParsedToInt;
-
-        } */
-
-        /* static void checkIfNumberCanBeParsedToIntNum2()
-        {
-            
-            while (!int.TryParse(input, out t))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\n\tYou should enter a number!");
-                Console.ForegroundColor = ConsoleColor.White;
-                input = Console.ReadLine();
-
-
-            }
-            num2 = inputAfterParsedToInt;
-
-        }
-        */
 
         static void showOptions()
         {
